@@ -1,0 +1,12 @@
+{
+  "authors": [
+    {
+      "name": "Meirinaldo Júnior",
+      "email": "meirinaldo.junior0@gmail.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "cosenary/instagram": "^2.3"
+  }
+}

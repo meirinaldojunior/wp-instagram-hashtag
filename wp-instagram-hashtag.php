@@ -7,11 +7,19 @@ Version: 0.1.0 beta
 Plugin URI: https://github.com/meirinaldojunior/wp-instagram-hashtag
 */
 
+require 'vendor/autoload.php';
+
+use MetzWeb\Instagram\Instagram;
+
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
+
+//cria as opções no banco
+add_option('wpih_instagram_token', 'testado');
 
 // Add menu de configuração do plugin (token)
 function add_menu_conf()
 {
+
 	add_menu_page(
 		'WP - Instagram - Hashtag', // Title of the page
 		'WP - Instagram - Hashtag', // Text to show on the menu link
@@ -22,6 +30,11 @@ function add_menu_conf()
 }
 add_action('admin_menu', 'add_menu_conf');
 
+//se recebeu o código do token do instagram, grava em option
+if($_GET['access_token']){
+	update_option('wpih_instagram_token', $_GET['access_token']);
+}
+
 function options_wp_instagram_hashtag()
 {
 	?>
@@ -31,19 +44,20 @@ function options_wp_instagram_hashtag()
 				<?php wp_nonce_field('update-options') ?>
 				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 				<strong>ID Client Instagram:</strong>
-						<input type="text" name="wpih_instagram_id" size="45" value="<?php echo get_option('wpih_instagram_id'); ?>" /><br>
+						<input type="text" name="wpih_instagram_id"  value="<?php echo get_option('wpih_instagram_id'); ?>" /><br>
 
 					<strong>ID Client Instagram:</strong>
-					<input type="text" name="wpih_instagram_id" size="45" value="<?php echo $_GET['code']; ?>" disabled/>
+					<input type="text" name="wpih_instagram_token"  value="<?php echo get_option('wpih_instagram_token'); ?>" disabled/>
 				</div>
 
 				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-						<button type="button" class="button button-primary">Gerar token</button>
+						<a href="<?php echo $uri_request_token_instagram; ?>"><button type="button" class="button button-primary">Gerar token</button>
 				</div>
 
-				<p><input type="submit" name="submit" class="button button-primary" value="Salvar configurações" /></p>
 				<input type="hidden" name="action" value="update" />
-				<input type="hidden" name="page_options" value="wpih_instagram_id" />
+				<input type="hidden" name="page_options" value="wpih_instagram_id,wpih_instagram_token" />
+				<p><input type="submit" name="submit" class="button button-primary" value="Salvar configurações" /></p>
+
 			</form>
 	</div>
 	<?php

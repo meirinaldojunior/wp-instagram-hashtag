@@ -4,27 +4,28 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit72e5a98ba8608f6332d8f332b01ecf80
+class ComposerStaticInit0b8ae02d42a2f0fc5ad911bbe6f1a5c2
 {
     public static $prefixLengthsPsr4 = array (
-        'M' => 
+        'A' => 
         array (
-            'MetzWeb\\Instagram\\' => 18,
+            'Andreyco\\Instagram\\' => 19,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'MetzWeb\\Instagram\\' => 
+        'Andreyco\\Instagram\\' => 
         array (
-            0 => __DIR__ . '/..' . '/cosenary/instagram/src',
+            0 => __DIR__ . '/../..' . '/src',
+            1 => __DIR__ . '/..' . '/andreyco/instagram/src',
         ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit72e5a98ba8608f6332d8f332b01ecf80::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit72e5a98ba8608f6332d8f332b01ecf80::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0b8ae02d42a2f0fc5ad911bbe6f1a5c2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0b8ae02d42a2f0fc5ad911bbe6f1a5c2::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

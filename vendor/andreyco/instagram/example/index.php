@@ -1,19 +1,22 @@
 <?php
 
-require '../src/Instagram.php';
-use MetzWeb\Instagram\Instagram;
+// ini_set('display_errors', 'off');
 
-// initialize class
-$instagram = new Instagram(array(
+require '../vendor/autoload.php';
+
+$instagram = new Andreyco\Instagram\Client(array(
   'apiKey'      => 'YOUR_APP_KEY',
   'apiSecret'   => 'YOUR_APP_SECRET',
-  'apiCallback' => 'YOUR_APP_CALLBACK' // must point to success.php
+  'apiCallback' => 'YOUR_APP_CALLBACK',
+  'scope'      => array('basic', 'comments', 'relationships', 'likes'),
 ));
 
 // create login URL
-$loginUrl = $instagram->getLoginUrl();
+$state = md5(time());
+$loginUrl = $instagram->getLoginUrl(array('relationships'), $state);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,8 +42,8 @@ $loginUrl = $instagram->getLoginUrl();
         <ul class="grid">
           <li><img src="assets/instagram-big.png" alt="Instagram logo"></li>
           <li>
-            <a class="login" href="<?php echo $loginUrl ?>">» Login with Instagram</a>
-            <h4>Use your Instagram account to login.</h4>
+            <a class="login" href="<? echo $loginUrl ?>">» Login with Instagram</a>
+            <h>Use your Instagram account to login.</h4>
           </li>
         </ul>
         <!-- GitHub project -->
